@@ -1,1 +1,1279 @@
-<p>Hello World</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ExcelR Demo - Career Training</title>
+
+  <style>
+    :root {
+      --primary: #073b7a;
+      --secondary: #f58220;
+      --light-blue: #eef6ff;
+      --dark: #172033;
+      --gray: #667085;
+      --white: #ffffff;
+      --light: #f8fafc;
+      --border: #e5e7eb;
+      --shadow: 0 12px 30px rgba(7, 59, 122, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--dark);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: auto;
+    }
+
+    .top-bar {
+      background: var(--primary);
+      color: var(--white);
+      font-size: 14px;
+      padding: 9px 0;
+    }
+
+    .top-bar-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--white);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .navbar {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 25px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .logo span {
+      color: var(--secondary);
+    }
+
+    .logo-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      background: var(--secondary);
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      list-style: none;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover {
+      color: var(--secondary);
+    }
+
+    .nav-buttons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      border: none;
+      cursor: pointer;
+      display: inline-block;
+      padding: 12px 20px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn-primary {
+      background: var(--secondary);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background: #d9660b;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      color: var(--primary);
+      border: 1px solid var(--primary);
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    .menu-btn {
+      display: none;
+      border: none;
+      background: transparent;
+      color: var(--primary);
+      font-size: 27px;
+      cursor: pointer;
+    }
+
+    .hero {
+      background:
+        linear-gradient(115deg, rgba(7, 59, 122, 0.97), rgba(7, 59, 122, 0.84)),
+        radial-gradient(circle at top right, #f58220, transparent 35%);
+      color: var(--white);
+      padding: 92px 0 82px;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 55px;
+    }
+
+    .hero h1 {
+      max-width: 680px;
+      font-size: clamp(38px, 5vw, 64px);
+      line-height: 1.08;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      color: #ffb16d;
+    }
+
+    .hero p {
+      max-width: 580px;
+      color: #e1eaff;
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .hero .btn-outline {
+      color: var(--white);
+      border-color: var(--white);
+    }
+
+    .hero .btn-outline:hover {
+      background: var(--white);
+      color: var(--primary);
+    }
+
+    .hero-card {
+      padding: 28px;
+      color: var(--dark);
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: 0 20px 55px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      top: -13px;
+      right: 30px;
+      width: 75px;
+      height: 75px;
+      background: var(--secondary);
+      border-radius: 50%;
+      opacity: 0.8;
+      z-index: -1;
+    }
+
+    .hero-card h3 {
+      color: var(--primary);
+      margin-bottom: 18px;
+      font-size: 23px;
+    }
+
+    .hero-card ul {
+      list-style: none;
+      margin-bottom: 22px;
+    }
+
+    .hero-card li {
+      padding: 11px 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--gray);
+    }
+
+    .hero-card li::before {
+      content: "✓";
+      color: var(--secondary);
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .stats {
+      background: var(--light);
+      padding: 28px 0;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      text-align: center;
+    }
+
+    .stat h2 {
+      color: var(--primary);
+      font-size: 30px;
+    }
+
+    .stat p {
+      color: var(--gray);
+      font-size: 14px;
+    }
+
+    section {
+      padding: 80px 0;
+    }
+
+    .section-heading {
+      max-width: 650px;
+      margin: 0 auto 42px;
+      text-align: center;
+    }
+
+    .section-heading .tag {
+      display: inline-block;
+      color: var(--secondary);
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .section-heading h2 {
+      color: var(--primary);
+      font-size: 36px;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .section-heading p {
+      color: var(--gray);
+    }
+
+    .course-tools {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 28px;
+    }
+
+    .search-box {
+      width: 100%;
+      max-width: 380px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 13px 17px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      outline: none;
+      font-size: 15px;
+    }
+
+    .course-filter {
+      padding: 0 14px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--white);
+      color: var(--dark);
+    }
+
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .course-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--white);
+      transition: 0.3s;
+    }
+
+    .course-card:hover {
+      transform: translateY(-7px);
+      box-shadow: var(--shadow);
+    }
+
+    .course-image {
+      height: 145px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      font-size: 45px;
+      font-weight: bold;
+      background: linear-gradient(135deg, var(--primary), #1976d2);
+    }
+
+    .course-card:nth-child(2) .course-image {
+      background: linear-gradient(135deg, #f58220, #ffb15c);
+    }
+
+    .course-card:nth-child(3) .course-image {
+      background: linear-gradient(135deg, #563d7c, #9b6dcc);
+    }
+
+    .course-card:nth-child(4) .course-image {
+      background: linear-gradient(135deg, #00897b, #53c7b9);
+    }
+
+    .course-card:nth-child(5) .course-image {
+      background: linear-gradient(135deg, #263238, #546e7a);
+    }
+
+    .course-card:nth-child(6) .course-image {
+      background: linear-gradient(135deg, #c62828, #ef5350);
+    }
+
+    .course-body {
+      padding: 22px;
+    }
+
+    .course-body h3 {
+      color: var(--primary);
+      margin-bottom: 9px;
+      font-size: 20px;
+    }
+
+    .course-body p {
+      min-height: 70px;
+      color: var(--gray);
+      font-size: 14px;
+    }
+
+    .course-info {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin: 17px 0;
+      color: var(--gray);
+      font-size: 13px;
+    }
+
+    .course-info span {
+      padding: 5px 8px;
+      background: var(--light-blue);
+      border-radius: 4px;
+    }
+
+    .course-body .btn {
+      width: 100%;
+      text-align: center;
+    }
+
+    .why-section {
+      background: var(--light-blue);
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .why-card {
+      padding: 26px 20px;
+      text-align: center;
+      background: var(--white);
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(7, 59, 122, 0.05);
+    }
+
+    .why-icon {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 16px;
+      color: var(--white);
+      background: var(--secondary);
+      border-radius: 50%;
+      font-size: 25px;
+    }
+
+    .why-card h3 {
+      color: var(--primary);
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    .why-card p {
+      color: var(--gray);
+      font-size: 14px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      align-items: center;
+      gap: 55px;
+    }
+
+    .about-visual {
+      min-height: 320px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--primary), #0c5caa);
+      border-radius: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-visual::before,
+    .about-visual::after {
+      content: "";
+      position: absolute;
+      border: 2px solid rgba(255, 255, 255, 0.25);
+      border-radius: 50%;
+    }
+
+    .about-visual::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .about-visual::after {
+      width: 430px;
+      height: 430px;
+    }
+
+    .about-visual-content {
+      z-index: 1;
+      text-align: center;
+    }
+
+    .about-visual-content div {
+      font-size: 65px;
+      font-weight: bold;
+    }
+
+    .about-content .tag {
+      color: var(--secondary);
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .about-content h2 {
+      color: var(--primary);
+      font-size: 36px;
+      line-height: 1.2;
+      margin: 10px 0 17px;
+    }
+
+    .about-content p {
+      color: var(--gray);
+      margin-bottom: 18px;
+    }
+
+    .about-list {
+      list-style: none;
+      margin-bottom: 25px;
+    }
+
+    .about-list li {
+      margin: 10px 0;
+      color: var(--dark);
+    }
+
+    .about-list li::before {
+      content: "✓";
+      color: var(--secondary);
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .testimonials {
+      background: var(--light);
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .testimonial-card {
+      padding: 25px;
+      background: var(--white);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .stars {
+      color: #f5a623;
+      letter-spacing: 3px;
+      margin-bottom: 15px;
+    }
+
+    .testimonial-card p {
+      color: var(--gray);
+      font-size: 15px;
+      margin-bottom: 18px;
+    }
+
+    .student {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .student-avatar {
+      width: 43px;
+      height: 43px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      background: var(--primary);
+      border-radius: 50%;
+      font-weight: bold;
+    }
+
+    .student h4 {
+      color: var(--primary);
+    }
+
+    .student small {
+      color: var(--gray);
+    }
+
+    .contact-section {
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .contact-content h2 {
+      font-size: 38px;
+      line-height: 1.2;
+      margin-bottom: 17px;
+    }
+
+    .contact-content p {
+      color: #dce8f9;
+      margin-bottom: 24px;
+    }
+
+    .contact-details {
+      list-style: none;
+    }
+
+    .contact-details li {
+      margin: 13px 0;
+      color: #e6effc;
+    }
+
+    .contact-details span {
+      display: inline-block;
+      width: 25px;
+      color: #ffb16d;
+    }
+
+    .contact-form {
+      padding: 28px;
+      background: var(--white);
+      border-radius: 12px;
+    }
+
+    .contact-form h3 {
+      color: var(--primary);
+      margin-bottom: 18px;
+      font-size: 23px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      outline: none;
+      font: inherit;
+    }
+
+    .form-group textarea {
+      min-height: 105px;
+      resize: vertical;
+    }
+
+    .contact-form .btn {
+      width: 100%;
+    }
+
+    footer {
+      padding: 25px 0;
+      color: #cbd5e1;
+      background: #061f42;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .toast {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 2000;
+      padding: 15px 20px;
+      color: var(--white);
+      background: #198754;
+      border-radius: 6px;
+      box-shadow: var(--shadow);
+      transform: translateY(120px);
+      transition: 0.3s;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+    }
+
+    @media (max-width: 900px) {
+      .nav-links {
+        position: absolute;
+        top: 76px;
+        left: 0;
+        right: 0;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 12px 5%;
+        background: var(--white);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.08);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links li {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 13px 0;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .nav-buttons {
+        display: none;
+      }
+
+      .hero-content,
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .course-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .why-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero-card {
+        max-width: 550px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .top-bar-content {
+        justify-content: center;
+        text-align: center;
+      }
+
+      .top-bar-content span:last-child {
+        display: none;
+      }
+
+      .hero {
+        padding: 65px 0;
+      }
+
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      section {
+        padding: 60px 0;
+      }
+
+      .stats-grid,
+      .course-grid,
+      .why-grid,
+      .testimonial-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .course-tools {
+        flex-direction: column;
+      }
+
+      .search-box {
+        max-width: none;
+      }
+
+      .course-filter {
+        min-height: 44px;
+      }
+
+      .section-heading h2,
+      .about-content h2,
+      .contact-content h2 {
+        font-size: 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <span>Learn today. Build your career tomorrow.</span>
+      <span>Demo support: +91 98765 43210</span>
+    </div>
+  </div>
+
+  <header>
+    <nav class="navbar container">
+      <a href="#home" class="logo">
+        <span class="logo-mark">E</span>
+        Excel<span>R</span>
+      </a>
+
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#courses">Courses</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <div class="nav-buttons">
+        <a href="#courses" class="btn btn-outline">View Courses</a>
+        <a href="#contact" class="btn btn-primary">Get Started</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="hero" id="home">
+      <div class="container hero-content">
+        <div>
+          <h1>Build skills that <span>move careers forward.</span></h1>
+          <p>
+            Learn practical technology and business skills through instructor-led
+            training, real-world projects, and career-focused learning paths.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#courses" class="btn btn-primary">Explore Courses</a>
+            <a href="#contact" class="btn btn-outline">Talk to an Advisor</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <h3>Why learners choose us</h3>
+          <ul>
+            <li>Industry-relevant course curriculum</li>
+            <li>Live online and classroom learning</li>
+            <li>Hands-on projects and assignments</li>
+            <li>Certification-oriented preparation</li>
+            <li>Career guidance and learner support</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary">Request a Callback</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="container stats-grid">
+        <div class="stat">
+          <h2>50+</h2>
+          <p>Professional Courses</p>
+        </div>
+        <div class="stat">
+          <h2>40+</h2>
+          <p>Countries Reached</p>
+        </div>
+        <div class="stat">
+          <h2>10K+</h2>
+          <p>Learners Trained</p>
+        </div>
+        <div class="stat">
+          <h2>4.8/5</h2>
+          <p>Learner Rating</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="courses">
+      <div class="container">
+        <div class="section-heading">
+          <span class="tag">Popular learning paths</span>
+          <h2>Choose the right course for your goals</h2>
+          <p>
+            Start with foundational knowledge and progress toward practical,
+            job-ready skills.
+          </p>
+        </div>
+
+        <div class="course-tools">
+          <div class="search-box">
+            <input
+              type="text"
+              id="courseSearch"
+              placeholder="Search courses..."
+              aria-label="Search courses"
+            />
+          </div>
+
+          <select class="course-filter" id="categoryFilter">
+            <option value="all">All categories</option>
+            <option value="data">Data and AI</option>
+            <option value="development">Development</option>
+            <option value="cloud">Cloud and DevOps</option>
+            <option value="business">Business Tools</option>
+          </select>
+        </div>
+
+        <div class="course-grid" id="courseGrid">
+
+          <article class="course-card" data-category="data">
+            <div class="course-image">AI</div>
+            <div class="course-body">
+              <h3>Data Science and Machine Learning</h3>
+              <p>Learn data analysis, visualization, machine learning, and project development.</p>
+              <div class="course-info">
+                <span>6 Months</span>
+                <span>Online</span>
+              </div>
+              <button class="btn btn-primary enroll-btn" data-course="Data Science and Machine Learning">
+                Enquire Now
+              </button>
+            </div>
+          </article>
+
+          <article class="course-card" data-category="business">
+            <div class="course-image">EX</div>
+            <div class="course-body">
+              <h3>Advanced Excel</h3>
+              <p>Improve spreadsheet productivity with formulas, dashboards, reports, and automation.</p>
+              <div class="course-info">
+                <span>1 Month</span>
+                <span>Online</span>
+              </div>
+              <button class="btn btn-primary enroll-btn" data-course="Advanced Excel">
+                Enquire Now
+              </button>
+            </div>
+          </article>
+
+          <article class="course-card" data-category="development">
+            <div class="course-image">&lt;/&gt;</div>
+            <div class="course-body">
+              <h3>Full Stack Development</h3>
+              <p>Build responsive websites and applications using frontend and backend technologies.</p>
+              <div class="course-info">
+                <span>6 Months</span>
+                <span>Hybrid</span>
+              </div>
+              <button class="btn btn-primary enroll-btn" data-course="Full Stack Development">
+                Enquire Now
+              </button>
+            </div>
+          </article>
+
+          <article class="course-card" data-category="data">
+            <div class="course-image">BI</div>
+            <div class="course-body">
+              <h3>Power BI and Business Intelligence</h3>
+              <p>Create interactive dashboards and convert business data into useful insights.</p>
+              <div class="course-info">
+                <span>2 Months</span>
+                <span>Online</span>
+              </div>
+              <button class="btn btn-primary enroll-btn" data-course="Power BI and Business Intelligence">
+                Enquire Now
+              </button>
+            </div>
+          </article>
+
+          <article class="course-card" data-category="cloud">
+            <div class="course-image">AWS</div>
+            <div class="course-body">
+              <h3>Cloud Computing</h3>
+              <p>Understand cloud services, deployment, storage, security, and application hosting.</p>
+              <div class="course-info">
+                <span>3 Months</span>
+                <span>Live Online</span>
+              </div>
+              <button class="btn btn-primary enroll-btn" data-course="Cloud Computing">
+                Enquire Now
+              </button>
+            </div>
+          </article>
+
+          <article class="course-card" data-category="development">
+            <div class="course-image">QA</div>
+            <div class="course-body">
+              <h3>Automation Testing</h3>
+              <p>Learn software testing concepts, Selenium automation, APIs, and test frameworks.</p>
+              <div class="course-info">
+                <span>3.5 Months</span>
+                <span>Hybrid</span>
+              </div>
+              <button class="btn btn-primary enroll-btn" data-course="Automation Testing">
+                Enquire Now
+              </button>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="why-section">
+      <div class="container">
+        <div class="section-heading">
+          <span class="tag">Learning experience</span>
+          <h2>Learn with a practical approach</h2>
+          <p>
+            Our demo platform focuses on clarity, practice, and measurable progress.
+          </p>
+        </div>
+
+        <div class="why-grid">
+          <div class="why-card">
+            <div class="why-icon">🎓</div>
+            <h3>Expert Trainers</h3>
+            <p>Learn concepts with guidance from experienced instructors.</p>
+          </div>
+
+          <div class="why-card">
+            <div class="why-icon">💻</div>
+            <h3>Hands-on Practice</h3>
+            <p>Apply knowledge through assignments and practical projects.</p>
+          </div>
+
+          <div class="why-card">
+            <div class="why-icon">📜</div>
+            <h3>Certification</h3>
+            <p>Prepare for industry-recognized learning and certification goals.</p>
+          </div>
+
+          <div class="why-card">
+            <div class="why-icon">🚀</div>
+            <h3>Career Support</h3>
+            <p>Get guidance for portfolios, interviews, and career planning.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container about-grid">
+        <div class="about-visual">
+          <div class="about-visual-content">
+            <div>EXCELR</div>
+            <p>Learn. Practice. Grow.</p>
+          </div>
+        </div>
+
+        <div class="about-content">
+          <span class="tag">About the platform</span>
+          <h2>Training designed for real-world growth</h2>
+          <p>
+            This demo represents a modern training institute website where students
+            and professionals can discover courses, compare learning paths, and
+            connect with an advisor.
+          </p>
+
+          <ul class="about-list">
+            <li>Structured courses for beginners and professionals</li>
+            <li>Flexible online and classroom learning options</li>
+            <li>Project-based learning for stronger portfolios</li>
+            <li>Simple support flow for course enquiries</li>
+          </ul>
+
+          <a href="#contact" class="btn btn-primary">Know More</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials" id="reviews">
+      <div class="container">
+        <div class="section-heading">
+          <span class="tag">Learner feedback</span>
+          <h2>What our learners say</h2>
+          <p>Sample testimonials for demonstration purposes.</p>
+        </div>
+
+        <div class="testimonial-grid">
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              “The project-based structure helped me understand concepts clearly
+              and improve my confidence.”
+            </p>
+            <div class="student">
+              <div class="student-avatar">AS</div>
+              <div>
+                <h4>Aarav Sharma</h4>
+                <small>Data Analytics Learner</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              “The course layout is simple, organized, and easy to follow for a
+              beginner.”
+            </p>
+            <div class="student">
+              <div class="student-avatar">PM</div>
+              <div>
+                <h4>Priya Mehta</h4>
+                <small>Full Stack Learner</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="stars">★★★★☆</div>
+            <p>
+              “The dashboard and practical exercises gave me a good starting point
+              for building my portfolio.”
+            </p>
+            <div class="student">
+              <div class="student-avatar">RK</div>
+              <div>
+                <h4>Rohan Kulkarni</h4>
+                <small>Cloud Computing Learner</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+      <div class="container contact-grid">
+        <div class="contact-content">
+          <h2>Ready to start learning?</h2>
+          <p>
+            Fill out the form and our demo advisor will help you choose a suitable
+            course.
+          </p>
+
+          <ul class="contact-details">
+            <li><span>☎</span> +91 98765 43210</li>
+            <li><span>✉</span> demo@example.com</li>
+            <li><span>⌖</span> Pune, Maharashtra</li>
+          </ul>
+        </div>
+
+        <form class="contact-form" id="contactForm">
+          <h3>Request a Callback</h3>
+
+          <div class="form-group">
+            <input type="text" id="name" placeholder="Your name" required />
+          </div>
+
+          <div class="form-group">
+            <input type="email" id="email" placeholder="Your email" required />
+          </div>
+
+          <div class="form-group">
+            <input type="tel" id="phone" placeholder="Your phone number" required />
+          </div>
+
+          <div class="form-group">
+            <select id="interest" required>
+              <option value="">Select your course interest</option>
+              <option>Data Science and Machine Learning</option>
+              <option>Advanced Excel</option>
+              <option>Full Stack Development</option>
+              <option>Power BI and Business Intelligence</option>
+              <option>Cloud Computing</option>
+              <option>Automation Testing</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <textarea id="message" placeholder="Tell us what you want to learn"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Submit Enquiry</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      © <span id="year"></span> ExcelR Demo. Created for educational purposes.
+    </div>
+  </footer>
+
+  <div class="toast" id="toast">
+    Thank you! Your enquiry has been submitted.
+  </div>
+
+  <script>
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+    const courseSearch = document.getElementById("courseSearch");
+    const categoryFilter = document.getElementById("categoryFilter");
+    const courseCards = document.querySelectorAll(".course-card");
+    const contactForm = document.getElementById("contactForm");
+    const toast = document.getElementById("toast");
+
+    menuBtn.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+      menuBtn.textContent = navLinks.classList.contains("active") ? "✕" : "☰";
+    });
+
+    document.querySelectorAll(".nav-links a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("active");
+        menuBtn.textContent = "☰";
+      });
+    });
+
+    function filterCourses() {
+      const searchText = courseSearch.value.toLowerCase().trim();
+      const selectedCategory = categoryFilter.value;
+
+      courseCards.forEach((card) => {
+        const courseName = card.querySelector("h3").textContent.toLowerCase();
+        const courseDescription = card.querySelector("p").textContent.toLowerCase();
+        const cardCategory = card.dataset.category;
+
+        const matchesSearch =
+          courseName.includes(searchText) ||
+          courseDescription.includes(searchText);
+
+        const matchesCategory =
+          selectedCategory === "all" || selectedCategory === cardCategory;
+
+        card.style.display =
+          matchesSearch && matchesCategory ? "block" : "none";
+      });
+    }
+
+    courseSearch.addEventListener("input", filterCourses);
+    categoryFilter.addEventListener("change", filterCourses);
+
+    document.querySelectorAll(".enroll-btn").forEach((button) => {
+      button.addEventListener("click", () => {
+        const selectedCourse = button.dataset.course;
+        document.getElementById("interest").value = selectedCourse;
+        document.getElementById("contact").scrollIntoView({ behavior: "smooth" });
+      });
+    });
+
+    contactForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      toast.classList.add("show");
+      contactForm.reset();
+
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 3500);
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
